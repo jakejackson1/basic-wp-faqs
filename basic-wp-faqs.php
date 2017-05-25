@@ -47,6 +47,8 @@ add_action( 'init', 'bwpfaqs_register_shortcode' );
  * @return string
  */
 function bwpfaqs_render_shortcode() {
-	/* Generate our FAQ markup. */
-	return 'working';
+	$faqs = new WP_Query( array(
+		'post_type'      => 'bwpfaqs',
+		'posts_per_page' => - 1,
+	) );
 }
