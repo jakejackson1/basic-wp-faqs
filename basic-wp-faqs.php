@@ -60,15 +60,23 @@ function bwpfaqs_render_shortcode() {
 	/* If any FAQ poss are found... */
 	if ( $faqs->have_posts() ) { ?>
 
-    <!-- Loop through our FAQ posts -->
-		<?php while ( $faqs->have_posts() ): $faqs->the_post(); ?>
+        <section class="bwpfaqs-container">
 
-		    <!-- Display the FAQ Title -->
-		    <h2><?php the_title(); ?></h2>
+            <!-- Loop through our FAQ posts -->
+			<?php while ( $faqs->have_posts() ) : $faqs->the_post(); ?>
+                <article id="bwpfaqs-post-<?php echo get_the_ID(); ?>">
 
-		    <!-- Display the FAQ Content -->
-        <?php the_content(); ?>
-		<?php endwhile; ?>
+                    <!-- Display the FAQ Title -->
+                    <h2 class="bwpfaqs-title"><?php the_title(); ?></h2>
+
+                    <!-- Display the FAQ Content -->
+                    <div class="bwpfaqs-content">
+						<?php the_content(); ?>
+                    </div>
+                </article>
+			<?php endwhile; ?>
+
+        </section>
 
 		<?php
 		/* Reset the original loop which was overridden when we used "the_post()" */
