@@ -47,8 +47,34 @@ add_action( 'init', 'bwpfaqs_register_shortcode' );
  * @return string
  */
 function bwpfaqs_render_shortcode() {
+
+	/* Query the database for our FAQ posts */
 	$faqs = new WP_Query( array(
 		'post_type'      => 'bwpfaqs',
 		'posts_per_page' => - 1,
 	) );
+
+	/* Enable output buffering to prevent any output being generated */
+	ob_start();
+
+	/* If any FAQ poss are found... */
+	if ( $faqs->have_posts() ) { ?>
+
+    <!-- Loop through our FAQ posts -->
+		<?php while ( $faqs->have_posts() ): $faqs->the_post(); ?>
+
+		    <!-- Display the FAQ Title -->
+		    <h2><?php the_title(); ?></h2>
+
+		    <!-- Display the FAQ Content -->
+        <?php the_content(); ?>
+		<?php endwhile; ?>
+
+		<?php
+		/* Reset the original loop which was overridden when we used "the_post()" */
+		wp_reset_postdata();
+	}
+
+	/* Get our output buffer and return the results */
+	return ob_get_clean();
 }
