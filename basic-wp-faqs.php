@@ -25,3 +25,28 @@ function bwpfaqs_register_cpt() {
 }
 
 add_action( 'init', 'bwpfaqs_register_cpt' );
+
+/**
+ * Register our FAQ Shortcode
+ *
+ * @since 0.1
+ */
+function bwpfaqs_register_shortcode() {
+	add_shortcode( 'bwpfaqs', 'bwpfaqs_render_shortcode' );
+}
+
+add_action( 'init', 'bwpfaqs_register_shortcode' );
+
+/**
+ * Generate our FAQs markup
+ *
+ * @since 0.1
+ *
+ * @Internal Shortcodes must ALWAYS return their output. Use output buffering to make this easy.
+ *
+ * @return string
+ */
+function bwpfaqs_render_shortcode() {
+	/* Generate our FAQ markup. */
+	return 'working';
+}
