@@ -18,7 +18,7 @@ Text Domain: basic-wp-faqs
  */
 function bwpfaqs_register_cpt() {
 	register_post_type( 'bwpfaqs', array(
-		'label'    => 'FAQs',
+		'label'    => __( 'FAQs', 'basic-wp-faqs' ),
 		'show_ui'  => true,
 		'supports' => array( 'title', 'editor' ),
 	) );
