@@ -40,6 +40,7 @@ function bwpfaqs_register_cpt() {
         'publicly_queryable' => true,
         'show_in_rest' => true,
         'supports' => array( 'title', 'editor' ),
+        'taxonomies' => array( 'post_tag' ),
     ) );
 }
 
@@ -59,18 +60,25 @@ add_action( 'init', 'bwpfaqs_register_shortcode' );
 /**
  * Generate our FAQs markup
  *
+ * @param array $attrs Contains the shortcode attributes that WP has parsed
  * @since 0.1
  *
  * @Internal Shortcodes must ALWAYS return their output. Use output buffering to make this easy.
  *
  * @return string
  */
-function bwpfaqs_render_shortcode() {
+function bwpfaqs_render_shortcode( $attrs = array() ) {
+
+    /* Merge user attrs with our default(s) */
+    $attrs = shortcode_atts( array(
+        'tag' => '',
+    ), $attrs );
 
     /* Query the database for our FAQ posts */
     $faqs = new WP_Query( array(
         'post_type'      => 'bwpfaqs',
         'posts_per_page' => -1,
+        'tag' => $attrs['tag'],
     ) );
 
     /* Enable output buffering to prevent any output being generated */
