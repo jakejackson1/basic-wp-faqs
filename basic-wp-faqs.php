@@ -38,6 +38,7 @@ function bwpfaqs_register_cpt() {
         'show_ui'  => true,
         'has_archive' => true,
         'publicly_queryable' => true,
+        'show_in_rest' => true,
         'supports' => array( 'title', 'editor' ),
     ) );
 }
