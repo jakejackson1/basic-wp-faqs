@@ -17,11 +17,11 @@ Text Domain: basic-wp-faqs
  * @since 0.1
  */
 function bwpfaqs_register_cpt() {
-	register_post_type( 'bwpfaqs', array(
-		'label'    => __( 'FAQs', 'basic-wp-faqs' ),
-		'show_ui'  => true,
-		'supports' => array( 'title', 'editor' ),
-	) );
+    register_post_type( 'bwpfaqs', array(
+        'label'    => __( 'FAQs', 'basic-wp-faqs' ),
+        'show_ui'  => true,
+        'supports' => array( 'title', 'editor' ),
+    ) );
 }
 
 add_action( 'init', 'bwpfaqs_register_cpt' );
@@ -32,7 +32,7 @@ add_action( 'init', 'bwpfaqs_register_cpt' );
  * @since 0.1
  */
 function bwpfaqs_register_shortcode() {
-	add_shortcode( 'bwpfaqs', 'bwpfaqs_render_shortcode' );
+    add_shortcode( 'bwpfaqs', 'bwpfaqs_render_shortcode' );
 }
 
 add_action( 'init', 'bwpfaqs_register_shortcode' );
@@ -48,22 +48,22 @@ add_action( 'init', 'bwpfaqs_register_shortcode' );
  */
 function bwpfaqs_render_shortcode() {
 
-	/* Query the database for our FAQ posts */
-	$faqs = new WP_Query( array(
-		'post_type'      => 'bwpfaqs',
-		'posts_per_page' => - 1,
-	) );
+    /* Query the database for our FAQ posts */
+    $faqs = new WP_Query( array(
+        'post_type'      => 'bwpfaqs',
+        'posts_per_page' => -1,
+    ) );
 
-	/* Enable output buffering to prevent any output being generated */
-	ob_start();
+    /* Enable output buffering to prevent any output being generated */
+    ob_start();
 
-	/* If any FAQ poss are found... */
-	if ( $faqs->have_posts() ) { ?>
+    /* If any FAQ poss are found... */
+    if ( $faqs->have_posts() ) { ?>
 
         <section class="bwpfaqs-container">
 
             <!-- Loop through our FAQ posts -->
-			<?php while ( $faqs->have_posts() ) : $faqs->the_post(); ?>
+            <?php while ( $faqs->have_posts() ) : $faqs->the_post(); ?>
                 <article id="bwpfaqs-post-<?php echo get_the_ID(); ?>">
 
                     <!-- Display the FAQ Title -->
@@ -71,18 +71,18 @@ function bwpfaqs_render_shortcode() {
 
                     <!-- Display the FAQ Content -->
                     <div class="bwpfaqs-content">
-						<?php the_content(); ?>
+                        <?php the_content(); ?>
                     </div>
                 </article>
-			<?php endwhile; ?>
+            <?php endwhile; ?>
 
         </section>
 
-		<?php
-		/* Reset the original loop which was overridden when we used "the_post()" */
-		wp_reset_postdata();
-	}
+        <?php
+        /* Reset the original loop which was overridden when we used "the_post()" */
+        wp_reset_postdata();
+    }
 
-	/* Get our output buffer and return the results */
-	return ob_get_clean();
+    /* Get our output buffer and return the results */
+    return ob_get_clean();
 }
