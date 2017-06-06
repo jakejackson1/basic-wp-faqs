@@ -17,8 +17,24 @@ Text Domain: basic-wp-faqs
  * @since 0.1
  */
 function bwpfaqs_register_cpt() {
+    $labels = array(
+        'name'               => _x( 'FAQs', 'post type general name', 'basic-wp-faqs' ),
+        'singular_name'      => _x( 'FAQ', 'post type singular name', 'basic-wp-faqs' ),
+        'menu_name'          => _x( 'FAQs', 'admin menu', 'basic-wp-faqs' ),
+        'add_new'            => _x( 'Add New', 'FAQ', 'basic-wp-faqs' ),
+        'add_new_item'       => __( 'Add New FAQ', 'basic-wp-faqs' ),
+        'new_item'           => __( 'New FAQ', 'basic-wp-faqs' ),
+        'edit_item'          => __( 'Edit FAQ', 'basic-wp-faqs' ),
+        'view_item'          => __( 'View FAQ', 'basic-wp-faqs' ),
+        'all_items'          => __( 'All FAQs', 'basic-wp-faqs' ),
+        'search_items'       => __( 'Search FAQs', 'basic-wp-faqs' ),
+        'parent_item_colon'  => __( 'Parent FAQ:', 'basic-wp-faqs' ),
+        'not_found'          => __( 'No FAQs found.', 'basic-wp-faqs' ),
+        'not_found_in_trash' => __( 'No FAQs found in Trash.', 'basic-wp-faqs' )
+    );
+
     register_post_type( 'bwpfaqs', array(
-        'label'    => __( 'FAQs', 'basic-wp-faqs' ),
+        'labels'    => $labels,
         'show_ui'  => true,
         'supports' => array( 'title', 'editor' ),
     ) );
