@@ -36,6 +36,8 @@ function bwpfaqs_register_cpt() {
     register_post_type( 'bwpfaqs', array(
         'labels'    => $labels,
         'show_ui'  => true,
+        'has_archive' => true,
+        'publicly_queryable' => true,
         'supports' => array( 'title', 'editor' ),
     ) );
 }
