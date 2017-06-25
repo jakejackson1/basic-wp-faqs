@@ -81,6 +81,9 @@ function bwpfaqs_render_shortcode( $attrs = array() ) {
         'tag' => $attrs['tag'],
     ) );
 
+    /* Load Accordion JavaScript */
+    wp_enqueue_script( 'bwpfaqs_accordian_js' );
+
     /* Enable output buffering to prevent any output being generated */
     ob_start();
 
@@ -119,8 +122,8 @@ function bwpfaqs_render_shortcode( $attrs = array() ) {
  *
  * @since 0.1
  */
-function bwpfaqs_enqueue_script_style() {
-    wp_enqueue_script( 'bwpfaqs_accordian_js', plugins_url( 'assets/accordion.js', __FILE__ ), array( 'jquery-ui-accordion' ), '1.0', true );
+function bwpfaqs_register_script_style() {
+    wp_register_script( 'bwpfaqs_accordian_js', plugins_url( 'assets/accordion.js', __FILE__ ), array( 'jquery-ui-accordion' ), '1.0', true );
 }
 
-add_action( 'wp_enqueue_scripts', 'bwpfaqs_enqueue_script_style' );
+add_action( 'wp_enqueue_scripts', 'bwpfaqs_register_script_style' );
