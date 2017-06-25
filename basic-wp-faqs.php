@@ -113,3 +113,14 @@ function bwpfaqs_render_shortcode( $attrs = array() ) {
     /* Get our output buffer and return the results */
     return ob_get_clean();
 }
+
+/**
+ * Register our plugin JavaScript and CSS
+ *
+ * @since 0.1
+ */
+function bwpfaqs_enqueue_script_style() {
+    wp_enqueue_script( 'bwpfaqs_accordian_js', plugins_url( 'assets/accordion.js', __FILE__ ), array( 'jquery-ui-accordion' ), '1.0', true );
+}
+
+add_action( 'wp_enqueue_scripts', 'bwpfaqs_enqueue_script_style' );
